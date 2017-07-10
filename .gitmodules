@@ -1,0 +1,3 @@
+[submodule "Assets/ConfigManager"]
+	path = Assets/ConfigManager
+	url = https://github.com/RickJiangShu/ConfigManager.git
