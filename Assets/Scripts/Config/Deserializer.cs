@@ -6,6 +6,10 @@
         {
             EquipConfig.dict.Add(set.Equips[i].EquipId, set.Equips[i]);
         }
+        for (int i = 0, l = set.EquipCSVs.Length; i < l; i++)
+        {
+            EquipCSVConfig.dict.Add(set.EquipCSVs[i].EquipId, set.EquipCSVs[i]);
+        }
         for (int i = 0, l = set.Monsters.Length; i < l; i++)
         {
             MonsterConfig.dict.Add(set.Monsters[i].id, set.Monsters[i]);
