@@ -7,7 +7,12 @@ public class Test : MonoBehaviour {
 	void Start () {
         SerializableSet set = Resources.Load<SerializableSet>("SerializableSet");
 
+
+        float startTime = Time.realtimeSinceStartup;
+
         Deserializer.Deserialize(set);
+
+        Debug.Log("解析速度：" + (Time.realtimeSinceStartup - startTime) + "s");
 
 
         /*

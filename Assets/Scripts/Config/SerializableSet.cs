@@ -1,4 +1,4 @@
-[System.Serializable]
+﻿[System.Serializable]
 public class SerializableSet : UnityEngine.ScriptableObject
 {
     public EquipConfig[] Equips;
