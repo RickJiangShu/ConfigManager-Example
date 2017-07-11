@@ -129,4 +129,10 @@ public class MonsterConfig
     public string detail3;
 
 
+    public static Dictionary<uint, MonsterConfig> dict = new Dictionary<uint, MonsterConfig>();
+
+    public static MonsterConfig Get(uint id)
+    {
+        return dict[id];
+    }
 }

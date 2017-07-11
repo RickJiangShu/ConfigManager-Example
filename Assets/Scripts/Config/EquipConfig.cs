@@ -79,4 +79,10 @@ public class EquipConfig
     public float boxBonus;
 
 
+    public static Dictionary<uint, EquipConfig> dict = new Dictionary<uint, EquipConfig>();
+
+    public static EquipConfig Get(uint EquipId)
+    {
+        return dict[EquipId];
+    }
 }

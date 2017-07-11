@@ -89,4 +89,10 @@ public class TestTypesConfig
     public bool[] p16;
 
 
+    public static Dictionary<string, TestTypesConfig> dict = new Dictionary<string, TestTypesConfig>();
+
+    public static TestTypesConfig Get(string id)
+    {
+        return dict[id];
+    }
 }
