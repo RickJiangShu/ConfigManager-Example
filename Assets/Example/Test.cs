@@ -14,7 +14,7 @@ public class Test : MonoBehaviour {
             Deserializer.Deserialize(set);
 
             //卸载内存
-            Resources.UnloadUnusedAssets();
+            Resources.UnloadUnusedAssets();//Resources卸载内存
         }
         else
         {
@@ -23,7 +23,7 @@ public class Test : MonoBehaviour {
             Deserializer.Deserialize(set);
 
             //卸载内存
-            bundle.Unload(true);
+            bundle.Unload(true);//AssetBundle卸载内存
         }
 
 
