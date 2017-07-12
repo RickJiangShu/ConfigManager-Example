@@ -89,10 +89,48 @@ public class TestTypesConfig
     public bool[] p16;
 
 
-    public static Dictionary<string, TestTypesConfig> dict = new Dictionary<string, TestTypesConfig>();
+    private static Dictionary<string, TestTypesConfig> dictionary = new Dictionary<string, TestTypesConfig>();
 
+    /// <summary>
+    /// 通过id获取TestTypesConfig的实例
+    /// </summary>
+    /// <param name="id">索引</param>
+    /// <returns>TestTypesConfig的实例</returns>
     public static TestTypesConfig Get(string id)
     {
-        return dict[id];
+        return dictionary[id];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<string, TestTypesConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static string[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        string[] keys = new string[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static TestTypesConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        TestTypesConfig[] values = new TestTypesConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }

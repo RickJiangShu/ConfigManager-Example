@@ -50,6 +50,10 @@ public class Test : MonoBehaviour {
         print(monsterCSVCfg.Attack);
         print(equipCSVCfg.EquipId);
         print(typesCSVCfg.p16);
+
+        print(PetConfig.GetDictionary());
+        print(PetConfig.GetValues().Length);
+        print(PetConfig.GetKeys().Length);
     }
 	
 	// Update is called once per frame

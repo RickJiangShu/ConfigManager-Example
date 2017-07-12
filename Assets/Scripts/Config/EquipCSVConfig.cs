@@ -79,10 +79,48 @@ public class EquipCSVConfig
     public float boxBonus;
 
 
-    public static Dictionary<uint, EquipCSVConfig> dict = new Dictionary<uint, EquipCSVConfig>();
+    private static Dictionary<uint, EquipCSVConfig> dictionary = new Dictionary<uint, EquipCSVConfig>();
 
+    /// <summary>
+    /// 通过EquipId获取EquipCSVConfig的实例
+    /// </summary>
+    /// <param name="EquipId">索引</param>
+    /// <returns>EquipCSVConfig的实例</returns>
     public static EquipCSVConfig Get(uint EquipId)
     {
-        return dict[EquipId];
+        return dictionary[EquipId];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<uint, EquipCSVConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static uint[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        uint[] keys = new uint[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static EquipCSVConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        EquipCSVConfig[] values = new EquipCSVConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }

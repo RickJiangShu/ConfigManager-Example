@@ -89,10 +89,48 @@ public class TestTypesCSVConfig
     public bool[] p16;
 
 
-    public static Dictionary<string, TestTypesCSVConfig> dict = new Dictionary<string, TestTypesCSVConfig>();
+    private static Dictionary<string, TestTypesCSVConfig> dictionary = new Dictionary<string, TestTypesCSVConfig>();
 
+    /// <summary>
+    /// 通过id获取TestTypesCSVConfig的实例
+    /// </summary>
+    /// <param name="id">索引</param>
+    /// <returns>TestTypesCSVConfig的实例</returns>
     public static TestTypesCSVConfig Get(string id)
     {
-        return dict[id];
+        return dictionary[id];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<string, TestTypesCSVConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static string[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        string[] keys = new string[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static TestTypesCSVConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        TestTypesCSVConfig[] values = new TestTypesCSVConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }

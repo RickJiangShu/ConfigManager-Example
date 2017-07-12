@@ -139,10 +139,48 @@ public class PetConfig
     public float MoveSpeed;
 
 
-    public static Dictionary<uint, PetConfig> dict = new Dictionary<uint, PetConfig>();
+    private static Dictionary<uint, PetConfig> dictionary = new Dictionary<uint, PetConfig>();
 
+    /// <summary>
+    /// 通过id获取PetConfig的实例
+    /// </summary>
+    /// <param name="id">索引</param>
+    /// <returns>PetConfig的实例</returns>
     public static PetConfig Get(uint id)
     {
-        return dict[id];
+        return dictionary[id];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<uint, PetConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static uint[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        uint[] keys = new uint[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static PetConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        PetConfig[] values = new PetConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }

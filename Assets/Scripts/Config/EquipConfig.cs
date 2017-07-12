@@ -79,10 +79,48 @@ public class EquipConfig
     public float boxBonus;
 
 
-    public static Dictionary<uint, EquipConfig> dict = new Dictionary<uint, EquipConfig>();
+    private static Dictionary<uint, EquipConfig> dictionary = new Dictionary<uint, EquipConfig>();
 
+    /// <summary>
+    /// 通过EquipId获取EquipConfig的实例
+    /// </summary>
+    /// <param name="EquipId">索引</param>
+    /// <returns>EquipConfig的实例</returns>
     public static EquipConfig Get(uint EquipId)
     {
-        return dict[EquipId];
+        return dictionary[EquipId];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<uint, EquipConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static uint[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        uint[] keys = new uint[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static EquipConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        EquipConfig[] values = new EquipConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }

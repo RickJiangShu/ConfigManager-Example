@@ -139,10 +139,48 @@ public class PetCSVConfig
     public float MoveSpeed;
 
 
-    public static Dictionary<uint, PetCSVConfig> dict = new Dictionary<uint, PetCSVConfig>();
+    private static Dictionary<uint, PetCSVConfig> dictionary = new Dictionary<uint, PetCSVConfig>();
 
+    /// <summary>
+    /// 通过id获取PetCSVConfig的实例
+    /// </summary>
+    /// <param name="id">索引</param>
+    /// <returns>PetCSVConfig的实例</returns>
     public static PetCSVConfig Get(uint id)
     {
-        return dict[id];
+        return dictionary[id];
+    }
+    
+    /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <returns>字典</returns>
+    public static Dictionary<uint, PetCSVConfig> GetDictionary()
+    {
+        return dictionary;
+    }
+
+    /// <summary>
+    /// 获取所有键
+    /// </summary>
+    /// <returns>所有键</returns>
+    public static uint[] GetKeys()
+    {
+        int count = dictionary.Keys.Count;
+        uint[] keys = new uint[count];
+        dictionary.Keys.CopyTo(keys,0);
+        return keys;
+    }
+
+    /// <summary>
+    /// 获取所有实例
+    /// </summary>
+    /// <returns>所有实例</returns>
+    public static PetCSVConfig[] GetValues()
+    {
+        int count = dictionary.Values.Count;
+        PetCSVConfig[] values = new PetCSVConfig[count];
+        dictionary.Values.CopyTo(values, 0);
+        return values;
     }
 }
