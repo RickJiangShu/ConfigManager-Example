@@ -1,0 +1,142 @@
+﻿Json官网：http://www.json.org/ 
+w3cschool：https://www.w3schools.com/js/js_json_intro.asp
+
+
+首先，我要做的不是Json运行时解析，而是 将 Json 转换为 C# 对象，再解析并序列化。
+
+
+Json Example:http://json.org/example.html
+
+{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+
+{"menu": {
+  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [
+      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}
+
+{"widget": {
+    "debug": "on",
+    "window": {
+        "title": "Sample Konfabulator Widget",
+        "name": "main_window",
+        "width": 500,
+        "height": 500
+    },
+    "image": { 
+        "src": "Images/Sun.png",
+        "name": "sun1",
+        "hOffset": 250,
+        "vOffset": 250,
+        "alignment": "center"
+    },
+    "text": {
+        "data": "Click Here",
+        "size": 36,
+        "style": "bold",
+        "name": "text1",
+        "hOffset": 250,
+        "vOffset": 100,
+        "alignment": "center",
+        "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
+    }
+}}  
+
+JsonObject000f
+
+由此可见，以下几点要加强学习：
+正则表达式
+文件编码
+文件序列化
+
+
+技术关键点：
+
+1、如何解析Json？
+使用正则表达式解析Json.
+https://stackoverflow.com/questions/2583472/regex-to-validate-json
+
+正则嵌套解析
+
+2、如何优雅的设计Json子对象（嵌套）？
+我确实可以为一个Json Object 创一个c# class 但是这样不优雅
+
+将 字段名相同、字段类型相同 的对象合成一个，复用JsonObject
+
+方案一：JsonObject00A.cs
+缺点：太多Class，其实可以是一个Class文件，然后f*f*f
+
+方案二：Dictionary<string,object>
+缺点：太多装箱/拆箱
+
+3、如果设计Json数组？
+
+
+TODO
+测试JSON正则，研究正则平衡组			
+
+
+$pcre_regex = '
+  /
+  (?(DEFINE)
+     (?<number>   -? (?= [1-9]|0(?!\d) ) \d+ (\.\d+)? ([eE] [+-]? \d+)? )    
+     (?<boolean>   true | false | null )
+     (?<string>    " ([^"\\\\]* | \\\\ ["\\\\bfnrt\/] | \\\\ u [0-9a-f]{4} )* " )
+
+     (?<pair>      \s* (?&string) \s* : (?&json)  )
+
+     (?<object>    \{  (?:  (?&pair)  (?: , (?&pair)  )*  )?  \s* \} )
+
+     (?<json>   \s* (?: (?&number) | (?&boolean) | (?&string) | (?&array) | (?&object) ) \s* )
+
+	 
+     (?<array>     \[  (?:  (?&json)  (?: , (?&json)  )*  )?  \s* \] )
+
+  )
+  \A (?&json) \Z
+  /six   
+';
+
+$regexString = '"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"';
+$regexNumber = '-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?';
+$regexBoolean= 'true|false|null'; // these are actually copied from Mario's answer
+$regex = '/\A('.$regexString.'|'.$regexNumber.'|'.$regexBoolean.'|';    //string, number, boolean
+$regex.= '\[(?:(?1)(?:,(?1))*)?\s*\]|'; //arrays
+$regex.= '\{(?:\s*'.$regexString.'\s*:(?1)(?:,\s*'.$regexString.'\s*:(?1))*)?\s*\}';    //objects
+$regex.= ')\Z/is';
+
+
+regexNumber = -?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?
+regexBoolean = true|false|null
+regexString = "([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"
+
+
+regexArray = \[(?:(?&json)(?:,(?&json))*)?\s*\])
+regexPair = \s*(?&string)

@@ -7,7 +7,6 @@ public class Test : MonoBehaviour {
     public bool loadByResource = true;
 
 	void Start () {
-        /*
         SerializableSet set;
         if (loadByResource)
         {
@@ -37,7 +36,7 @@ public class Test : MonoBehaviour {
         MonsterConfig monsterCfg = MonsterConfig.Get(210102);
         EquipConfig equipCfg = EquipConfig.Get(601110);
         TestTypesConfig typesCfg = TestTypesConfig.Get("1");
-        
+
         //CSV
         MonsterCSVConfig monsterCSVCfg = MonsterCSVConfig.Get(210103);
         EquipCSVConfig equipCSVCfg = EquipCSVConfig.Get(601111);
@@ -55,7 +54,6 @@ public class Test : MonoBehaviour {
         print(PetConfig.GetDictionary());
         print(PetConfig.GetValues().Length);
         print(PetConfig.GetKeys().Length);
-         */
     }
 	
 	// Update is called once per frame
