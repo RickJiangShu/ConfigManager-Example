@@ -1,0 +1,149 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+/*
+ * JSON 的解析一开始是打算找到一个正则表达式直接用的，但是后来发现正则需要递归，但C#不支持这种“正则递归”。
+ * 所以，我觉得自己用C# + 正则去解析JSON
+ * 
+ * 
+ * 定义：
+ * Object       JSON最外层对象，空或者多个Members
+ * Members      Object 的 所有成员，一个Pair或多个Members
+ * Pair         string : value
+ * Array        [],[elements]
+ * Elements     一个value，elments
+ * 
+ * value        string number true false null object array 
+ * 
+ * Object   本质是一个Diconary<string, object>
+ * Members  本质是一个Pair[]
+ * Pair     本质是一个Diconary<string, object>
+ * 
+ * Array    本质是一个object[]
+ * 
+ * 伪代码：
+ * bool ParseObject(string content,out Object object)
+ * bool ParseMembers(string content,out Members members)
+ * bool ParsePair(string content,out Pair pair)
+ * bool ParseValue(string content,object result)
+ * 
+ * 数组
+ * bool ParseArray(string value,out JsonParseArray result)
+ * 
+ * 基础
+ * bool ParseString(string value,out string result)
+ * bool ParseNumber(string value,out float result)
+ * bool ParseBool(string value,out bool result)
+ */
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        public const float PI = 3.14f;
+
+        private static string test = "\"Images/Sun.png\" 250 true";
+
+        static void Main(string[] args)
+        {
+            int a = 10;
+            int b = 4;
+
+            string sr;
+            float fr;
+            bool br;
+
+            string path = @"C:\Users\Administrator\Documents\visual studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\example1.json";
+            string jsonContent = File.ReadAllText(path);
+
+            Dictionary<string,object> obj;
+            ParseObject(jsonContent, out obj);
+
+            Console.WriteLine(a / (float)b);
+            Console.ReadLine();
+
+        }
+        internal const string regexObject = @"\{([\s\S]*)\}";
+        internal static bool ParseObject(string content,out Dictionary<string,object> obj)
+        {
+            Match match = Regex.Match(content, regexObject);
+            if (match.Success)
+            {
+                string value = match.Groups[1].Value;
+                obj = new Dictionary<string, object>();
+                return true;
+            }
+            else
+            {
+                obj = null;
+                return false;
+            }
+        }
+
+
+        #region 基础类型 string\number\bool
+        internal const string regexString = @"""([^""\\\\]*|\\\\[""\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*""";
+        internal static bool ParseString(string content,out string result)
+        {
+            Match match = Regex.Match(content,regexString);
+            result = match.Value;
+            return match.Success;
+        }
+
+        internal static string regexNumber = @"-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?";
+        internal static bool ParseNumber(string content,out float result)
+        {
+            Match match = Regex.Match(content,regexNumber);
+            if(match.Success)
+            {
+                string value = match.Value;
+                result = float.Parse(value);
+                return true;
+            }
+            else
+            {
+                result = 0;
+                return false;
+            }
+        }
+
+        internal static string regexBool = @"true|false|null";
+        private static bool ParseBool(string content, out bool result)
+        {
+            Match match = Regex.Match(content, regexBool);
+            if (match.Success)
+            {
+                string value = match.Value;
+                result = value == "true";
+                return true;
+            }
+            else
+            {
+                result = false;
+                return false;
+            }
+        }
+
+        #endregion
+    }
+
+}
+
+/*
+/
+(?(DEFINE)
+(?<number>-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?)
+(?<boolean>true|false|null)
+(?<string>"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*")
+(?<array>\[(?:(?<-json>)(?:,(?<-json>))*)?\s*\])
+(?<pair>\s*(?<-string>)\s*:(?<-json>))
+(?<object>\{(?:(?<-pair>)(?:,(?<-pair>))*)?\s*\})
+(?<json>\s*(?:(?<-number>)|(?<-boolean>)|(?<-string>)|(?<-array>)|(?<-object>))\s*)
+)\A(?<-json>)s\Z
+/six
+*/ 
