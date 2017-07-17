@@ -20,11 +20,11 @@ using System.Threading.Tasks;
  * 
  * value        string number true false null object array 
  * 
- * Object   本质是一个Diconary<string, object>
- * Members  本质是一个Pair[]
- * Pair     本质是一个Diconary<string, object>
+ * JSON        本质是一个Diconary<string, object>
+ * Members     本质是一个Pair[]
+ * Pair        本质是一个单个键值对 key value
  * 
- * Array    本质是一个object[]
+ * Array       本质是一个object[]
  * 
  * 伪代码：
  * bool ParseObject(string content,out Object object)
@@ -49,6 +49,8 @@ namespace ConsoleApplication1
 
         private static string test = "\"Images/Sun.png\" 250 true";
 
+
+
         static void Main(string[] args)
         {
             int a = 10;
@@ -58,92 +60,211 @@ namespace ConsoleApplication1
             float fr;
             bool br;
 
-            string path = @"C:\Users\Administrator\Documents\visual studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\example1.json";
+            string path = @"D:\用户目录\我的文档\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\example1.json";
             string jsonContent = File.ReadAllText(path);
 
-            Dictionary<string,object> obj;
-            ParseObject(jsonContent, out obj);
+            Dictionary<string, object> obj = ParseJSON(jsonContent);
 
             Console.WriteLine(a / (float)b);
             Console.ReadLine();
-
         }
-        internal const string regexObject = @"\{([\s\S]*)\}";
-        internal static bool ParseObject(string content,out Dictionary<string,object> obj)
+
+
+        /// <summary>
+        /// 解析JSON入口
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        internal static Dictionary<string, object> ParseJSON(string json)
         {
-            Match match = Regex.Match(content, regexObject);
+            Match match = Regex.Match(json, regexObject);
             if (match.Success)
             {
-                string value = match.Groups[1].Value;
-                obj = new Dictionary<string, object>();
-                return true;
+                string content = match.Groups[1].Value;
+                return ParseObject(ref content);
             }
-            else
-            {
-                obj = null;
-                return false;
-            }
+            return null;
         }
 
-
-        #region 基础类型 string\number\bool
-        internal const string regexString = @"""([^""\\\\]*|\\\\[""\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*""";
-        internal static bool ParseString(string content,out string result)
+        internal static Dictionary<string, object> ParseObject(ref string content)
         {
-            Match match = Regex.Match(content,regexString);
-            result = match.Value;
-            return match.Success;
+            //解析members
+            Pair[] members = ParseMembers(ref content);
+
+            //创建Object
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            if (members != null)
+            {
+                for (int i = 0, l = members.Length; i < l; i++)
+                {
+                    result.Add(members[i].key, members[i].value);
+                }
+            }
+            return result;
         }
 
-        internal static string regexNumber = @"-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?";
-        internal static bool ParseNumber(string content,out float result)
+        internal static Pair[] ParseMembers(ref string content)
         {
-            Match match = Regex.Match(content,regexNumber);
-            if(match.Success)
-            {
-                string value = match.Value;
-                result = float.Parse(value);
-                return true;
-            }
-            else
-            {
-                result = 0;
-                return false;
-            }
+            List<Pair> membersList = new List<Pair>();
+
+            //判断Object类型
+            Pair[] pairsOfObject = ParsePairsOfObject(ref content);
+            membersList.AddRange(pairsOfObject);
+
+            //判断String类型
+            Pair[] pairsOfString = ParsePairsOfString(ref content);
+            membersList.AddRange(pairsOfString);
+
+            //判断Number类型
+            Pair[] pairsOfNumber = ParsePairsOfNumber(ref content);
+            membersList.AddRange(pairsOfNumber);
+
+            //判断Bool类型
+            Pair[] pairsOfBool = ParsePairsOfBool(ref content);
+            membersList.AddRange(pairsOfBool);
+
+            //       membersList.AddRange(pairsOfObject);
+
+            return membersList.ToArray();
         }
 
-        internal static string regexBool = @"true|false|null";
-        private static bool ParseBool(string content, out bool result)
+        internal static object[] ParseArray(ref string content)
         {
-            Match match = Regex.Match(content, regexBool);
-            if (match.Success)
+            List<object> array = new List<object>();
+
+            //解析Object
+            MatchCollection matchObjects = MatchesAndRemove(ref content, regexObject);
+            for (int i = 0, l = matchObjects.Count; i < l; i++)
             {
-                string value = match.Value;
-                result = value == "true";
-                return true;
+                string s = matchObjects[i].Value;
+                array.Add( ParseObject(ref s) );
             }
-            else
-            {
-                result = false;
-                return false;
-            }
+
         }
+
+        #region 正则表达式
+        //解析键值对
+        internal const string regexPairOf = @"\s*" + regexString + @"\s*:\s*";
+        internal const string regexPairOfObject = regexPairOf + regexObject;
+        internal const string regexPairOfArray = regexPairOf + regexArray;
+        internal const string regexPairOfString = regexPairOf + regexString;
+        internal const string regexPairOfNumber = regexPairOf + regexNumber;
+        internal const string regexPairOfBool = regexPairOf + regexBool;
+
+        //对象
+        internal const string regexObject = @"\{([^}]*)\}";
+
+        //数组
+        internal const string regexArray = @"\[([^\]]*)\]";
+
+        //基础类型
+        internal const string regexString = "\"([^\"]*)\"";//"[^"]*"
+        internal const string regexNumber = @"(-?(?=[1-9]|0(?!\d))\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)";
+        internal const string regexBool = "(true|false|null)";
 
         #endregion
+        /// <summary>
+        /// 对象类型 对
+        /// </summary>
+    //    internal const string regexPairOfObject = regexPair + regexObject;
+
+        #region 解析键值对
+        internal static Pair[] ParsePairsOfObject(ref string content)
+        {
+            Pair[] pairs = ParsePairs(ref content, regexPairOfObject);
+
+            //递归解析Object
+            for (int i = 0, l = pairs.Length; i < l; i++)
+            {
+                pairs[i].value = ParseObject(ref pairs[i].content);
+            }
+
+            return pairs;
+        }
+
+        internal static Pair[] ParsePairsOfString(ref string content)
+        {
+            Pair[] pairs = ParsePairs(ref content, regexPairOfString);
+
+            //content == value
+            for (int i = 0, l = pairs.Length; i < l; i++)
+            {
+                pairs[i].value = pairs[i].content;
+            }
+            return pairs;
+        }
+
+        internal static Pair[] ParsePairsOfNumber(ref string content)
+        {
+            Pair[] pairs = ParsePairs(ref content, regexPairOfNumber);
+
+            for (int i = 0, l = pairs.Length; i < l; i++)
+            {
+                pairs[i].value = float.Parse(pairs[i].content);
+            }
+            return pairs;
+        }
+
+        internal static Pair[] ParsePairsOfBool(ref string content)
+        {
+            Pair[] pairs = ParsePairs(ref content, regexPairOfBool);
+
+            for (int i = 0, l = pairs.Length; i < l; i++)
+            {
+                pairs[i].value = pairs[i].content == "true";
+            }
+            return pairs;
+        }
+
+        /// <summary>
+        /// 解析键值对基础（解析出key 和 content）
+        /// </summary>
+        /// <returns></returns>
+        internal static Pair[] ParsePairs(ref string content,string regex)
+        {
+            MatchCollection matches = Regex.Matches(content, regex);
+            int count = matches.Count;
+            Pair[] pairs = new Pair[count];
+            for (int i = 0 ; i < count; i++)
+            {
+                Match match = matches[i];
+                string key = match.Groups[1].Value;
+                string valueString = match.Groups[2].Value;
+                pairs[i] = new Pair(key, valueString);
+            }
+
+            //删除解析过的字段（避免重复解析）
+            content = Regex.Replace(content, regex, string.Empty);
+            return pairs;
+        }
+        #endregion
+
+        internal static MatchCollection MatchesAndRemove(ref string content,string regex)
+        {
+            MatchCollection matches = Regex.Matches(content, regex);
+            int count = matches.Count;
+            if (count > 0)
+            {
+                //删除解析过的字段（避免重复解析）
+                content = Regex.Replace(content, regex, string.Empty);
+            }
+            return matches;
+        }
+    }
+
+    /// <summary>
+    /// 键值对
+    /// </summary>
+    internal class Pair
+    {
+        public string key;//键
+        public string content;//原始文本内容
+        public object value;//转换后的值
+        public Pair(string key, string content)
+        {
+            this.key = key;
+            this.content = content;
+        }
     }
 
 }
-
-/*
-/
-(?(DEFINE)
-(?<number>-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?)
-(?<boolean>true|false|null)
-(?<string>"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*")
-(?<array>\[(?:(?<-json>)(?:,(?<-json>))*)?\s*\])
-(?<pair>\s*(?<-string>)\s*:(?<-json>))
-(?<object>\{(?:(?<-pair>)(?:,(?<-pair>))*)?\s*\})
-(?<json>\s*(?:(?<-number>)|(?<-boolean>)|(?<-string>)|(?<-array>)|(?<-object>))\s*)
-)\A(?<-json>)s\Z
-/six
-*/ 

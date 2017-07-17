@@ -127,6 +127,7 @@ $pcre_regex = '
 $regexString = '"([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"';
 $regexNumber = '-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?';
 $regexBoolean= 'true|false|null'; // these are actually copied from Mario's answer
+
 $regex = '/\A('.$regexString.'|'.$regexNumber.'|'.$regexBoolean.'|';    //string, number, boolean
 $regex.= '\[(?:(?1)(?:,(?1))*)?\s*\]|'; //arrays
 $regex.= '\{(?:\s*'.$regexString.'\s*:(?1)(?:,\s*'.$regexString.'\s*:(?1))*)?\s*\}';    //objects
@@ -140,3 +141,14 @@ regexString = "([^"\\\\]*|\\\\["\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"
 
 regexArray = \[(?:(?&json)(?:,(?&json))*)?\s*\])
 regexPair = \s*(?&string)
+
+
+const string newRegexNumber = @"(?<number>-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-]?\d+)?)";
+        const string newRegexBool = @"(?<boolean>true|false|null)";
+        const string newRegexString = @"(?<string>""([^""\\\\]*|\\\\[""\\\\bfnrt\/]|\\\\u[0-9a-f]{4})*"")";
+
+        const string newRegexPair = @"(?<pair>\s*" + newRegexString + @"\s*:" + newRegexJson;
+        const string newRegexObject = @"(?<object>\{(?:" + newRegexPair + "(?:," + newRegexPair + @")*)?\s*\})";
+        const string newRegexJson = @"(?<json>\s*(?:" + newRegexNumber + "|" + newRegexBool + "|" + newRegexString + "|" + newRegexArray + "|" + newRegexObject + @")\s*)";
+
+        const string newRegexArray = @"(?<array>\[(?:" + newRegexJson + @"(?:," + newRegexJson + @")*)?\s*\])";
