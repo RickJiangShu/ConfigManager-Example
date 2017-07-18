@@ -7,7 +7,6 @@ public class Test : MonoBehaviour {
     public bool loadByResource = true;
 
 	void Start () {
-        /*
         SerializableSet set;
         if (loadByResource)
         {
@@ -55,7 +54,6 @@ public class Test : MonoBehaviour {
         print(PetConfig.GetDictionary());
         print(PetConfig.GetValues().Length);
         print(PetConfig.GetKeys().Length);
-         */
     }
 	
 	// Update is called once per frame
