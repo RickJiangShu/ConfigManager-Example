@@ -21,13 +21,6 @@ public class TestJsonParse : MonoBehaviour
     {
         string content = textAsset.text;
 
-        print(content);
-
-        string a = regexText.text;
-        print(a);
-
-        print(regexString);
-        print(regexObject);
     }
 
     // Update is called once per frame
@@ -35,7 +28,19 @@ public class TestJsonParse : MonoBehaviour
     {
 
     }
-    
+
+    [System.Serializable]
+    public class MyData
+    {
+        public string[] GlossSeeAlso;
+    }
+
+
+    [System.Serializable]
+    public class Data
+    {
+        public object Name;
+    }
 
     //Json Regex Fork:https://stackoverflow.com/questions/2583472/regex-to-validate-json
     //替换" 为 ""
