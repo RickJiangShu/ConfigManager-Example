@@ -1,0 +1,21 @@
+{
+    "frames":
+    {
+        "BarGreyBlue2":
+        {
+            "frame": {"x":2,"y":2,"w":3,"h":88},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":3,"h":88},
+            "sourceSize": {"w":3,"h":88}  
+        },
+        "blueBg2":
+        {
+            "frame": {"x":2,"y":92,"w":14,"h":14},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":14,"h":14},
+            "sourceSize": {"w":14,"h":14} 
+        }
+    }
+}

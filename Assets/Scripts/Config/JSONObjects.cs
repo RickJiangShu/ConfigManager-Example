@@ -99,3 +99,36 @@ public class JSONObject12
     public System.String debug;
 
 }
+[System.Serializable]
+public class JSONObject13
+{
+    public System.Byte x;
+    public System.Byte y;
+    public System.Byte w;
+    public System.Byte h;
+
+}
+[System.Serializable]
+public class JSONObject14
+{
+    public System.Byte w;
+    public System.Byte h;
+
+}
+[System.Serializable]
+public class JSONObject15
+{
+    public JSONObject13 frame;
+    public JSONObject13 spriteSourceSize;
+    public JSONObject14 sourceSize;
+    public System.Boolean rotated;
+    public System.Boolean trimmed;
+
+}
+[System.Serializable]
+public class JSONObject16
+{
+    public JSONObject15 BarGreyBlue2;
+    public JSONObject15 blueBg2;
+
+}

@@ -7,6 +7,7 @@
         JEX2JSON.ins = set.JEX2;
         JEX3JSON.ins = set.JEX3;
         JEX4JSON.ins = set.JEX4;
+        JEX5JSON.ins = set.JEX5;
 
     }
 }

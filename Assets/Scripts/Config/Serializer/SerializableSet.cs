@@ -6,5 +6,6 @@ public class SerializableSet : UnityEngine.ScriptableObject
     public JEX2JSON JEX2;
     public JEX3JSON JEX3;
     public JEX4JSON JEX4;
+    public JEX5JSON JEX5;
 
 }

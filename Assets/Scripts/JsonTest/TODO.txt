@@ -152,3 +152,8 @@ const string newRegexNumber = @"(?<number>-?(?=[1-9]|0(?!\d))\d+(\.\d+)?([eE][+-
         const string newRegexJson = @"(?<json>\s*(?:" + newRegexNumber + "|" + newRegexBool + "|" + newRegexString + "|" + newRegexArray + "|" + newRegexObject + @")\s*)";
 
         const string newRegexArray = @"(?<array>\[(?:" + newRegexJson + @"(?:," + newRegexJson + @")*)?\s*\])";
+
+
+
+XML 解析定义
+
