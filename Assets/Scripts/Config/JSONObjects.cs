@@ -99,16 +99,3 @@ public class JSONObject12
     public System.String debug;
 
 }
-[System.Serializable]
-public class JSONObject13
-{
-    public System.String id;
-
-}
-[System.Serializable]
-public class JSONObject14
-{
-    public JSONObject13[] items;
-    public System.String header;
-
-}
