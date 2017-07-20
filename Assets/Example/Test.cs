@@ -7,8 +7,7 @@ public class Test : MonoBehaviour {
     public bool loadByResource = true;
 
 	void Start () {
-
-        /*
+/*
         SerializableSet set;
 
         float startTime = Time.realtimeSinceStartup;
@@ -34,7 +33,6 @@ public class Test : MonoBehaviour {
         Debug.Log("解析速度：" + (Time.realtimeSinceStartup - startTime) + "s");
         */
 
-         
     }
 	
 	// Update is called once per frame

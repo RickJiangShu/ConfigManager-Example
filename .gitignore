@@ -12,6 +12,7 @@ Bin-Android/
 *.suo
 *.user
 *.swp
+.vscode/
 
 #项目文件
 Assets/CustomPlugins/
