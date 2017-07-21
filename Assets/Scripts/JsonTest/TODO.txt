@@ -100,7 +100,7 @@ https://stackoverflow.com/questions/2583472/regex-to-validate-json
 
 
 TODO
-测试JSON正则，研究正则平衡组			
+测试Json正则，研究正则平衡组			
 
 
 $pcre_regex = '

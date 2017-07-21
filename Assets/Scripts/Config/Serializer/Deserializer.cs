@@ -3,11 +3,9 @@
     public static void Deserialize(SerializableSet set)
     {
 
-        JEX1JSON.ins = set.JEX1;
-        JEX2JSON.ins = set.JEX2;
-        JEX3JSON.ins = set.JEX3;
-        JEX4JSON.ins = set.JEX4;
-        JEX5JSON.ins = set.JEX5;
+        XEX1Xml.ins = set.XEX1;
+        XEX2Xml.ins = set.XEX2;
+        XEX3Xml.ins = set.XEX3;
 
     }
 }
