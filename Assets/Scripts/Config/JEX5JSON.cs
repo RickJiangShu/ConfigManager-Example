@@ -3,6 +3,6 @@ public class JEX5JSON
 {
     public static JEX5JSON ins;
 
-    public JSONObject16 frames;
+    public JSONObject20 frames;
 
 }
