@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 2319023863
+CRC: 2431246583
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: config.ab
+      Name: asdfaf
+      Dependencies: {}
+    Info_1:
+      Name: tttt
       Dependencies: {}

@@ -6,6 +6,7 @@
  */
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 /// <summary>
@@ -21,6 +22,9 @@ public class TestJsonParse : MonoBehaviour
     {
         string content = textAsset.text;
 
+        XmlDocument document = new XmlDocument();
+
+        Debug.Log(XEX1Xml.ins.glossary.GlossDiv.GlossList.GlossEntry.GlossSee.OtherTerm);
     }
 
     // Update is called once per frame

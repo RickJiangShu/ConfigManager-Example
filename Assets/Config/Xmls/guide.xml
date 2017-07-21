@@ -1,0 +1,346 @@
+﻿<!--
+新手引导 (Guide)
+定义:
+阶段 (Step): 每过一个阶段会记录一次
+段落 (Part): 标志具体内容
+指令（Commond）：映射程序函数（分为阻塞/非阻塞，默认为阻塞，非阻塞特别标注）
+
+任务 (Task): 侦听事件 (阻塞)
+所谓阻塞的指令，其实就是自动添加一个任务侦听。
+
+指令集 (字符串):
+进入家园 EnterHome
+进入战斗 EnterBattle
+进入新手战斗    EnterBattle|1000
+进入大地图 EnterWorldMap
+显示对话    ShowDialog|
+显示箭头    ShowArrow|
+显示帮助    ShowTips|
+特殊处理    Special|
+
+特殊处理
+大地图家园入口 1
+建造按钮 2
+英雄按钮 3
+技能按钮 4
+扭蛋按钮 5
+按钮商城页签 6
+拆一个房子的引导 GuideTips_1
+弹出家园起名框 8
+指向主基地升级按钮 9
+选中主基地 10
+主基地升级 GuideTips_2
+装备技能1 GuideTips_3
+升级技能1 GuideTips_4
+确认建造 1001
+
+任务集 (字符串):
+当进入家园  10001
+当进入战斗 10002
+当进入大地图 10003
+当对话结束 10004
+当显示箭头 10005
+家园起名 10006
+升级主基地 10007
+建造金矿 10008
+建造怪物 10009
+建造怪物完成 10010
+战斗胜利 10011
+解锁扭蛋 10012
+开启扭蛋 10013
+装备技能 10014
+升级技能 10015
+升级英雄 10016
+拆掉一个房子 10017
+拆掉所有房子 10018
+解锁资源关卡 10019
+解锁挑战关卡 10020
+-->
+ <root>
+<button>3,1</button><!--英雄按钮-->
+<button>4,14</button><!--技能按钮-->
+<button>5,6</button><!--扭蛋按钮-->
+<button>1000,10</button><!--指向主基地升级按钮-->
+<button>20,8</button><!--指向大地图按钮-->
+<button>22,17</button><!--指向建造菜单怪物按钮-->
+<button>23,18</button><!--指向建造菜单装饰物按钮-->
+<button>24,18</button><!--家园界面-建造-道路页签按钮-->
+<button>26,4</button><!--家园界面-成就按钮-->
+<button>27,18</button><!--家园界面-排行按钮-->
+<button>28,18</button><!--家园界面-邮件按钮-->
+<button>31,14</button><!--大地图界面-英雄界面入口-->
+<button>32,5</button><!--大地图界面-扭蛋界面入口-->
+<button>33,12</button><!--大地图界面-技能界面入口-->
+<button>34,18</button><!--大地图界面-军衔礼包界面入口-->
+<button>35,2</button><!--战斗界面-撤退按钮-->
+<button>36,14</button><!--战斗界面-技能与MP栏-->
+<button>37,1</button><!--家园界面-设置按钮-->
+<button>1005,1</button><!--建筑菜单-英雄按钮-->
+<button>1006,14</button><!--建筑菜单-技能按钮-->
+<button>1007,5</button><!--建筑菜单-扭蛋按钮-->
+<button>38,8</button><!--大地图界面-普通关卡按钮-->
+<button>39,8</button><!--大地图界面-挑战关卡按钮-->
+<button>40,8</button><!--侦查界面-开始战斗按钮-->
+<button>41,8</button><!--侦查界面-更换对手按钮-->
+<button>42,10</button><!--大地图界面-返回大地图按钮-->
+<button>1008,17</button><!--建筑菜单-守卫按钮-->
+<button>43,17</button><!--家园界面-守卫按钮-->
+<button>44,14</button><!--侦查界面-技能选择区-->
+<button>45,14</button><!--指向技能选择界面关闭按钮-->
+<button>46,14</button><!--指向技能合成界面第一个合成按钮-->
+<button>47,14</button><!--指向技能合成界面关闭按钮-->
+  <step name ="0">
+    <born>Commond:EnterBattle|1000</born>
+    <!--首次登陆后的引导-->
+    <part>Task:10002</part>
+    <!--当进入战斗-->
+    <part>Commond:ShowDialog|1001</part>
+    <!--1001-介绍剧情、操作拆除一个房子-->
+    <part>Task:10004</part>
+    <part>Commond:ShowTips|GuideTips_1</part>
+    <!--显示帮助拆一个房子的引导-->
+    <part>Task:10017</part>
+    <!--任务-拆一个房子的引导-->
+    <part>Commond:ShowDialog|1002</part>
+    <!--1002-告诉玩家拆完所有房子-->
+    <part>Task:10004</part>
+    <part>Task:10024,1000</part>
+    <!--断开引导-玩家自由操作直至通关1001，此时解锁建筑升级按钮-->
+  </step>
+  <step name ="1">
+    <born>Commond:EnterHome</born>
+    <!--起名字-->
+    <part>Task:10001</part>
+    <part>Commond:ShowDialog|1003</part>
+    <!--1003-告诉玩家起名字-->
+    <part>Task:10004</part>
+    <part>Commond:Special|8</part>
+    <!--特殊处理弹出家园起名框-->
+    <part>Task:10006</part>
+  </step>
+  <step name ="2">
+    <born>Commond:EnterHome</born>
+    <!--建造-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1005</part>
+    <!--1005-告诉玩家可以建造-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|2</part>
+    <!--显示箭头建造按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|12</part>
+    <!--显示箭头指向建造菜单首个按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|1001</part>
+    <part>Task:10021</part>
+  </step>
+  <step name ="3">
+    <born>Commond:EnterHome</born>
+    <part>Task:10023,201501</part>
+    <!--断开引导-玩家自由操作，直至建造民居-->
+  </step>
+  <step name ="4">
+    <born>Commond:EnterHome</born>
+    <!--建造-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1006</part>
+    <!--1006-告诉玩家造完所有可以造的东西-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|26</part>
+    <!--箭头指向建造界面入口-->
+    <part>Task:10021</part>
+  </step>
+  <step name ="5">
+    <born>Commond:EnterHome</born>
+    <part>Task:10023,203001</part>
+    <!--断开引导-玩家自由操作，直至建造马戏团-->
+  </step>
+  <step name ="6">
+    <born>Commond:EnterHome</born>
+    <!--战斗获得扭蛋说明-引导-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1007</part>
+    <!--1007-告诉玩家可以开扭蛋-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|5</part>
+    <!--显示箭头扭蛋按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|15</part>
+    <!--显示箭头指向扭蛋背包第一格-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|16</part>
+    <!--显示箭头指向扭蛋解锁按钮-->
+    <part>Task:10021</part>
+  </step>
+  <step name ="7">
+    <born>Commond:EnterHome</born>
+    <!--战斗获得扭蛋说明-引导-->
+    <born>Task:10001</born>
+    <born>Commond:ShowArrow|5</born>
+    <!--显示箭头扭蛋按钮-->
+    <born>Task:10021</born>
+    <!--确认点击指向的按钮-->
+    <part>Commond:ShowDialog|1008</part>
+    <!--1008-告诉玩家每天有免费的扭蛋可以开-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|14</part>
+    <!--显示箭头指向扭蛋商城按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|13</part>
+    <!--指向扭蛋商城第一格-->
+    <part>Task:10021</part>
+    <part>Task:10013</part>
+    <part>Commond:ShowDialog|1009</part>
+    <!--1009-告诉玩家开扭蛋很重要-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|19</part>
+    <!--显示箭头-->
+    <part>Task:10021</part>
+  </step>
+  <step name ="8">
+    <born>Commond:EnterHome</born>
+    <!--此处解锁大地图入口，播放按钮解锁动画-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1010</part>
+    <!--1010-告诉玩家世界地图位置，开始探索世界-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|20</part>
+    <part>Task:10021</part>
+  </step>
+  <step name ="9">
+    <born>Commond:EnterHome</born>
+    <!--免费扭蛋说明-引导-->
+    <born>Task:10001</born>
+    <born>Commond:ShowArrow|20</born>
+    <born>Task:10021</born>
+    <part>Commond:ShowDialog|1011</part>
+    <!--1011-提示玩家去战斗-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|38</part>
+    <part>Task:10026</part>
+    <part>Commond:ShowDialog|1023</part>
+    <!--1023-提示玩家侦查可以提前了解敌军情况，然后点击开战-->
+    <part>Task:10004</part>
+  </step>
+  <step name ="10">
+    <born>Commond:EnterHome</born>
+    <!--免费扭蛋说明-引导-->
+    <born>Task:10001</born>
+    <born>Commond:ShowArrow|20</born>
+    <born>Task:10021</born>
+    <born>Commond:ShowArrow|38</born>
+    <born>Task:10021</born>
+    <born>Commond:ShowArrow|40</born>
+    <born>Task:10021</born>
+    <part>Task:10002</part>
+    <part>Commond:ShowDialog|1012</part>
+    <!--1012-提示玩家获取1星可以通关，也能获取生命-->
+    <part>Task:10004</part>
+  </step>
+  <step name ="11">
+    <born>Commond:EnterHome</born>
+    <part>Task:10024,1001</part>
+    <!--断开引导-玩家自由操作直至通关1001，此时解锁建筑升级按钮-->
+  </step>
+  <step name ="12">
+    <born>Commond:EnterHome</born>
+    <!--升级主基地-引导-->
+    <part>Task:10001</part>
+    <part>Commond:ShowDialog|1013</part>
+    <!--1013-提示玩家升级主基地-->
+    <part>Task:10004</part>
+    <part>Commond:Special|10</part>
+    <!--特殊处理选中主基地-->
+    <part>Commond:ShowArrow|1000</part>
+    <!--显示箭头指向主基地升级按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|11</part>
+    <!--显示箭头指向升级菜单升级按钮-主基地-->
+    <part>Task:10021</part>
+    <part>Commond:ShowDialog|1014</part>
+    <!--1014-提示玩家进行家园建设-->
+    <part>Task:10004</part>
+  </step>
+  <step name ="13">
+    <born>Commond:EnterHome</born>
+    <part>Task:10023,201301</part>
+    <!--断开引导-玩家自由操作，建造了纸牌屋，此时解锁英雄升级入口，技能入口，解锁战斗界面技能槽、MP槽、怪物MP掉落-->
+  </step>
+  <step name ="14">
+    <born>Commond:EnterHome</born>
+    <!--装备技能-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1017</part>
+    <!--1017-提示玩家英雄可以带技能-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|4</part>
+    <!--显示箭头技能按钮-->
+    <part>Task:10027</part>
+    <part>Commond:ShowArrow|46</part>
+    <!--显示箭头指向技能合成界面第一个合成按钮-->
+    <part>Task:10021</part>
+    <!--确认点击指向的按钮-->
+    <part>Commond:ShowArrow|47</part>
+    <!--显示箭头指向技能合成界面关闭按钮-->
+    <part>Task:10021</part>
+    <!--确认点击指向的按钮-->
+  </step>
+  <step name ="15">
+    <born>Commond:EnterHome</born>
+    <!--装备技能提示-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1024</part>
+    <!--1024-提示玩家带技能操作-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|20</part>
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|38</part>
+    <part>Task:10026</part>
+    <part>Commond:ShowArrow|48</part>
+    <part>Task:10021</part>
+    <part>Task:10028</part>
+    <part>Commond:ShowArrow|49</part>
+    <part>Task:10021</part>
+    <part>Commond:ShowDialog|1025</part>
+    <!--1025-简单介绍技能解锁-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|45</part>
+    <part>Task:10021</part>
+  </step>
+  <step name ="16">
+    <born>Commond:EnterHome</born>
+    <part>Task:10023,201401</part>
+    <!--断开引导-玩家自由操作，并建造了怪物小屋，此时解锁怪物页签解锁-->
+  </step>
+  <step name ="17">
+    <born>Commond:EnterHome</born>
+    <!--引导怪物建造-->
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1021</part>
+    <!--1021-提示玩家可以造怪物-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|2</part>
+    <!--显示箭头建造按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|22</part>
+    <!--显示箭头指向建造菜单怪物按钮-->
+    <part>Task:10021</part>
+    <part>Commond:ShowDialog|1022</part>
+    <!--1022-提示玩家多造怪物-->
+    <part>Task:10004</part>
+  </step>
+  <step name ="18">
+    <born>Commond:EnterHome</born>
+    <born>Task:10001</born>
+    <part>Commond:ShowDialog|1015</part>
+    <!--1015-提示解锁了装饰物页签-->
+    <part>Task:10004</part>
+    <part>Commond:ShowArrow|2</part>
+    <part>Task:10021</part>
+    <part>Commond:ShowArrow|23</part>
+    <part>Task:10021</part>
+    <part>Commond:ShowDialog|1016</part>
+    <!--1016-提示玩家多造装饰物，提升繁荣度等级-->
+    <part>Task:10004</part>
+  </step>
+ </root>
