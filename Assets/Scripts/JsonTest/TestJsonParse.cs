@@ -24,7 +24,7 @@ public class TestJsonParse : MonoBehaviour
 
         XmlDocument document = new XmlDocument();
 
-        Debug.Log(XEX1Xml.ins.glossary.GlossDiv.GlossList.GlossEntry.GlossSee.OtherTerm);
+     //   Debug.Log(XEX1Xml.ins.glossary.GlossDiv.GlossList.GlossEntry.GlossSee.OtherTerm);
     }
 
     // Update is called once per frame
