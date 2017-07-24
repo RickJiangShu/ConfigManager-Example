@@ -2,12 +2,12 @@
 {
     public static void Deserialize(SerializableSet set)
     {
+       
+        for (int i = 0, l = set.Equips.Length; i < l; i++)
+        {
+            EquipSheet.GetDictionary().Add(set.Equips[i].EquipId, set.Equips[i]);
+        }
 
-        guideXml.ins = set.guide;
-        XEX1Xml.ins = set.XEX1;
-        XEX2Xml.ins = set.XEX2;
-        XEX3Xml.ins = set.XEX3;
-        XEX4Xml.ins = set.XEX4;
 
     }
 }
