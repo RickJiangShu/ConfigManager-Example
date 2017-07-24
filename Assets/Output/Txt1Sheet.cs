@@ -21,7 +21,7 @@ public class Txt1Sheet
     /// <summary>
     /// 随机权值
     /// </summary>
-    public uint RandomRatio;
+    public byte RandomRatio;
 
     /// <summary>
     /// 装备部件
@@ -31,7 +31,7 @@ public class Txt1Sheet
     /// <summary>
     /// 装备品质
     /// </summary>
-    public uint EquipStar;
+    public byte EquipStar;
 
     /// <summary>
     /// 装备属性

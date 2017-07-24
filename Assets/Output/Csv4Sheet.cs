@@ -6,7 +6,7 @@ public class Csv4Sheet
     /// <summary>
     /// 测试所有类型
     /// </summary>
-    public string id;
+    public byte id;
 
     /// <summary>
     /// 布尔
@@ -21,52 +21,52 @@ public class Csv4Sheet
     /// <summary>
     /// uint16
     /// </summary>
-    public ushort p3;
+    public byte p3;
 
     /// <summary>
     /// uint32
     /// </summary>
-    public uint p4;
+    public byte p4;
 
     /// <summary>
     /// int8
     /// </summary>
-    public sbyte p5;
+    public byte p5;
 
     /// <summary>
     /// int16
     /// </summary>
-    public short p6;
+    public sbyte p6;
 
     /// <summary>
     /// int32
     /// </summary>
-    public int p7;
+    public sbyte p7;
 
     /// <summary>
     /// long
     /// </summary>
-    public long p8;
+    public sbyte p8;
 
     /// <summary>
     /// ulong
     /// </summary>
-    public ulong p9;
+    public ushort p9;
 
     /// <summary>
     /// float
     /// </summary>
-    public float p10;
+    public uint p10;
 
     /// <summary>
     /// double
     /// </summary>
-    public double p11;
+    public float p11;
 
     /// <summary>
     /// string
     /// </summary>
-    public string p12;
+    public float p12;
 
     /// <summary>
     /// int数组
@@ -89,14 +89,14 @@ public class Csv4Sheet
     public bool[] p16;
 
 
-    private static Dictionary<string, Csv4Sheet> dictionary = new Dictionary<string, Csv4Sheet>();
+    private static Dictionary<byte, Csv4Sheet> dictionary = new Dictionary<byte, Csv4Sheet>();
 
     /// <summary>
     /// 通过id获取Csv4Sheet的实例
     /// </summary>
     /// <param name="id">索引</param>
     /// <returns>Csv4Sheet的实例</returns>
-    public static Csv4Sheet Get(string id)
+    public static Csv4Sheet Get(byte id)
     {
         return dictionary[id];
     }
@@ -105,7 +105,7 @@ public class Csv4Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<string, Csv4Sheet> GetDictionary()
+    public static Dictionary<byte, Csv4Sheet> GetDictionary()
     {
         return dictionary;
     }
