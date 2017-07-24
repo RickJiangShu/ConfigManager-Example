@@ -1,7 +1,7 @@
 装备ID,装备图标,装备名称,随机权值,装备部件,装备品质,装备属性,主属性,主属性成长系数,主属性基础值,名称材质处理,粒子特效,粒子特效参数,武器模型,宝箱系数
 uint32,string,string,uint32,uint32,uint32,string,uint32,float,float,uint32,string,string,string,float
 EquipId,EquipIcon,EquipName,RandomRatio,EquipType,EquipStar,EquipStat,MainStat,StatRatio,StatBase,NameShader,Particles,ParticlesPara,Model,boxBonus
-601110,icon_601110,name_601110,10,1,0,,1001,5,10,0,,,,1.05
+601110,icon_601110,name_601110,10,1,0,,1001,5,10,0,adfasdfa,asdf,,1.05
 601111,icon_601111,name_601111,7,1,1,"1002,0.02,0.05",1001,6,10,0,,,,1.05
 601112,icon_601112,name_601112,5,1,2,"1002,0.05,0.1;1052,0.02,0.05",1001,7,10,0,,,,1.05
 601113,icon_601113,name_601113,3,1,3,"1002,0.01,0.02;1052,0.05,0.1;1042,0.5,1",1001,8,10,0,,,,1.05

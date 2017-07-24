@@ -10,9 +10,15 @@ using UnityEditor;
 /// <summary>
 /// TestBuild
 /// </summary>
-public class TestBuild : ScriptableObject
+[InitializeOnLoad]
+public class TestAssetBundle
 {
-    [MenuItem("Test/Build")]
+    static TestAssetBundle()
+    {
+        ConfigManagerEditor.ConfigWindow.serializeCompleted += Build;
+    }
+
+    [MenuItem("TestAssetBundle/Build")]
     public static void Build()
     {
         BuildTarget targetPlatform = BuildTarget.StandaloneWindows;
