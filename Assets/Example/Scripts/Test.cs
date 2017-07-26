@@ -39,6 +39,7 @@ public class Test : MonoBehaviour {
         print(Xml2Xml.Get().menu.popup.menuitem[2].value);//*.xml
         print(Xls1Sheet.Get(601314).EquipType);//*.xls
         print(Xlsx1Sheet.Get(601213).boxBonus);//*.xlsx
+         
     }
 	
 	// Update is called once per frame
