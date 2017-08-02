@@ -11,7 +11,6 @@ public class SerializableSet : UnityEngine.ScriptableObject
     public Txt4Sheet[] Txt4s;
     public Xlsx1Sheet[] Xlsx1s;
     public Xlsx2Sheet[] Xlsx2s;
-    public ShenSheet[] Shens;
 
     public Json1Json Json1;
     public Json2Json Json2;

@@ -52,11 +52,6 @@
         {
             Xlsx2Sheet.GetDictionary().Add(set.Xlsx2s[i].EquipId, set.Xlsx2s[i]);
         }
-       
-        for (int i = 0, l = set.Shens.Length; i < l; i++)
-        {
-            ShenSheet.GetDictionary().Add(set.Shens[i].id, set.Shens[i]);
-        }
 
         Json1Json.instance = set.Json1;
         Json2Json.instance = set.Json2;
