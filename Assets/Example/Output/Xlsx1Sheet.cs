@@ -74,7 +74,7 @@ public class Xlsx1Sheet
     public string Model;
 
     /// <summary>
-    /// 宝箱系数
+    /// 宝箱系数宝箱系数
     /// </summary>
     public float boxBonus;
 

@@ -43,14 +43,19 @@
             Txt4Sheet.GetDictionary().Add(set.Txt4s[i].id, set.Txt4s[i]);
         }
        
-        for (int i = 0, l = set.Xls1s.Length; i < l; i++)
-        {
-            Xls1Sheet.GetDictionary().Add(set.Xls1s[i].EquipId, set.Xls1s[i]);
-        }
-       
         for (int i = 0, l = set.Xlsx1s.Length; i < l; i++)
         {
             Xlsx1Sheet.GetDictionary().Add(set.Xlsx1s[i].EquipId, set.Xlsx1s[i]);
+        }
+       
+        for (int i = 0, l = set.Xlsx2s.Length; i < l; i++)
+        {
+            Xlsx2Sheet.GetDictionary().Add(set.Xlsx2s[i].EquipId, set.Xlsx2s[i]);
+        }
+       
+        for (int i = 0, l = set.Shens.Length; i < l; i++)
+        {
+            ShenSheet.GetDictionary().Add(set.Shens[i].id, set.Shens[i]);
         }
 
         Json1Json.instance = set.Json1;

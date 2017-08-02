@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Xls1Sheet
+public class Xlsx2Sheet
 {
     /// <summary>
     /// 装备ID
@@ -79,14 +79,14 @@ public class Xls1Sheet
     public float boxBonus;
 
 
-    private static Dictionary<uint, Xls1Sheet> dictionary = new Dictionary<uint, Xls1Sheet>();
+    private static Dictionary<uint, Xlsx2Sheet> dictionary = new Dictionary<uint, Xlsx2Sheet>();
 
     /// <summary>
-    /// 通过EquipId获取Xls1Sheet的实例
+    /// 通过EquipId获取Xlsx2Sheet的实例
     /// </summary>
     /// <param name="EquipId">索引</param>
-    /// <returns>Xls1Sheet的实例</returns>
-    public static Xls1Sheet Get(uint EquipId)
+    /// <returns>Xlsx2Sheet的实例</returns>
+    public static Xlsx2Sheet Get(uint EquipId)
     {
         return dictionary[EquipId];
     }
@@ -95,7 +95,7 @@ public class Xls1Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<uint, Xls1Sheet> GetDictionary()
+    public static Dictionary<uint, Xlsx2Sheet> GetDictionary()
     {
         return dictionary;
     }

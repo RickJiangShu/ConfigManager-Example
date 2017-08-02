@@ -8,7 +8,6 @@ public class Test : MonoBehaviour {
 
     void Start()
     {
-        
         SerializableSet set;
 
         float startTime = Time.realtimeSinceStartup;
@@ -37,9 +36,7 @@ public class Test : MonoBehaviour {
         print(Csv2Sheet.Get(210101).name);//*.csv
         print(Json1Json.Get().glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso[0]);//*.json
         print(Xml2Xml.Get().menu.popup.menuitem[2].value);//*.xml
-        print(Xls1Sheet.Get(601314).EquipType);//*.xls
         print(Xlsx1Sheet.Get(601213).boxBonus);//*.xlsx
-         
     }
 	
 	// Update is called once per frame
