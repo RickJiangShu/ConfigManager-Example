@@ -1,0 +1,10 @@
+﻿{
+    "sourceFolder": "Assets/Example/Configs",
+    "configOutputFolder": "Assets/Example/Output",
+    "assetOutputFolder": "Assets/Example/Resources",
+    "txtEnabled": false,
+    "csvEnabled": true,
+    "jsonEnabled": true,
+    "xmlEnabled": true,
+    "xlsxEnabled": true
+}

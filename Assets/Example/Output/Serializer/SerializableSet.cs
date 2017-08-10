@@ -5,6 +5,7 @@ public class SerializableSet : UnityEngine.ScriptableObject
     public Csv2Sheet[] Csv2s;
     public Csv3Sheet[] Csv3s;
     public Csv4Sheet[] Csv4s;
+    public LevelBossSheet[] LevelBosss;
     public Txt1Sheet[] Txt1s;
     public Txt2Sheet[] Txt2s;
     public Txt3Sheet[] Txt3s;

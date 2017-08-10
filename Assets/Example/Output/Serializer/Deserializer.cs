@@ -23,6 +23,11 @@
             Csv4Sheet.GetDictionary().Add(set.Csv4s[i].id, set.Csv4s[i]);
         }
        
+        for (int i = 0, l = set.LevelBosss.Length; i < l; i++)
+        {
+            LevelBossSheet.GetDictionary().Add(set.LevelBosss[i].id, set.LevelBosss[i]);
+        }
+       
         for (int i = 0, l = set.Txt1s.Length; i < l; i++)
         {
             Txt1Sheet.GetDictionary().Add(set.Txt1s[i].EquipId, set.Txt1s[i]);
