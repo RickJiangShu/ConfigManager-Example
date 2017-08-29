@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Csv4Sheet
+public class Txt4Config
 {
     /// <summary>
     /// 测试所有类型
     /// </summary>
-    public byte id;
+    public string id;
 
     /// <summary>
     /// 布尔
@@ -21,52 +21,52 @@ public class Csv4Sheet
     /// <summary>
     /// uint16
     /// </summary>
-    public byte p3;
+    public ushort p3;
 
     /// <summary>
     /// uint32
     /// </summary>
-    public byte p4;
+    public uint p4;
 
     /// <summary>
     /// int8
     /// </summary>
-    public byte p5;
+    public sbyte p5;
 
     /// <summary>
     /// int16
     /// </summary>
-    public sbyte p6;
+    public short p6;
 
     /// <summary>
     /// int32
     /// </summary>
-    public sbyte p7;
+    public int p7;
 
     /// <summary>
     /// long
     /// </summary>
-    public sbyte p8;
+    public long p8;
 
     /// <summary>
     /// ulong
     /// </summary>
-    public ushort p9;
+    public ulong p9;
 
     /// <summary>
     /// float
     /// </summary>
-    public uint p10;
+    public float p10;
 
     /// <summary>
     /// double
     /// </summary>
-    public float p11;
+    public double p11;
 
     /// <summary>
     /// string
     /// </summary>
-    public float p12;
+    public string p12;
 
     /// <summary>
     /// int数组
@@ -89,14 +89,14 @@ public class Csv4Sheet
     public bool[] p16;
 
 
-    private static Dictionary<byte, Csv4Sheet> dictionary = new Dictionary<byte, Csv4Sheet>();
+    private static Dictionary<string, Txt4Config> dictionary = new Dictionary<string, Txt4Config>();
 
     /// <summary>
-    /// 通过id获取Csv4Sheet的实例
+    /// 通过id获取Txt4Config的实例
     /// </summary>
     /// <param name="id">索引</param>
-    /// <returns>Csv4Sheet的实例</returns>
-    public static Csv4Sheet Get(byte id)
+    /// <returns>Txt4Config的实例</returns>
+    public static Txt4Config Get(string id)
     {
         return dictionary[id];
     }
@@ -105,7 +105,7 @@ public class Csv4Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<byte, Csv4Sheet> GetDictionary()
+    public static Dictionary<string, Txt4Config> GetDictionary()
     {
         return dictionary;
     }

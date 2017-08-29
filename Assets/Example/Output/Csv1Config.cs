@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Csv1Sheet
+public class Csv1Config
 {
     /// <summary>
     /// 装备ID
@@ -79,14 +79,14 @@ public class Csv1Sheet
     public float boxBonus;
 
 
-    private static Dictionary<uint, Csv1Sheet> dictionary = new Dictionary<uint, Csv1Sheet>();
+    private static Dictionary<uint, Csv1Config> dictionary = new Dictionary<uint, Csv1Config>();
 
     /// <summary>
-    /// 通过EquipId获取Csv1Sheet的实例
+    /// 通过EquipId获取Csv1Config的实例
     /// </summary>
     /// <param name="EquipId">索引</param>
-    /// <returns>Csv1Sheet的实例</returns>
-    public static Csv1Sheet Get(uint EquipId)
+    /// <returns>Csv1Config的实例</returns>
+    public static Csv1Config Get(uint EquipId)
     {
         return dictionary[EquipId];
     }
@@ -95,7 +95,7 @@ public class Csv1Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<uint, Csv1Sheet> GetDictionary()
+    public static Dictionary<uint, Csv1Config> GetDictionary()
     {
         return dictionary;
     }

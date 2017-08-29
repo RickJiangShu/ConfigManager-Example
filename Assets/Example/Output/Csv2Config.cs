@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Csv2Sheet
+public class Csv2Config
 {
     /// <summary>
     /// 怪物ID
@@ -129,14 +129,14 @@ public class Csv2Sheet
     public string detail3;
 
 
-    private static Dictionary<uint, Csv2Sheet> dictionary = new Dictionary<uint, Csv2Sheet>();
+    private static Dictionary<uint, Csv2Config> dictionary = new Dictionary<uint, Csv2Config>();
 
     /// <summary>
-    /// 通过id获取Csv2Sheet的实例
+    /// 通过id获取Csv2Config的实例
     /// </summary>
     /// <param name="id">索引</param>
-    /// <returns>Csv2Sheet的实例</returns>
-    public static Csv2Sheet Get(uint id)
+    /// <returns>Csv2Config的实例</returns>
+    public static Csv2Config Get(uint id)
     {
         return dictionary[id];
     }
@@ -145,7 +145,7 @@ public class Csv2Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<uint, Csv2Sheet> GetDictionary()
+    public static Dictionary<uint, Csv2Config> GetDictionary()
     {
         return dictionary;
     }

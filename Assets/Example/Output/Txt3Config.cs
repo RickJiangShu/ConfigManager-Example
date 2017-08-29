@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Csv3Sheet
+public class Txt3Config
 {
     /// <summary>
     /// 宠物ID
@@ -139,14 +139,14 @@ public class Csv3Sheet
     public float MoveSpeed;
 
 
-    private static Dictionary<uint, Csv3Sheet> dictionary = new Dictionary<uint, Csv3Sheet>();
+    private static Dictionary<uint, Txt3Config> dictionary = new Dictionary<uint, Txt3Config>();
 
     /// <summary>
-    /// 通过id获取Csv3Sheet的实例
+    /// 通过id获取Txt3Config的实例
     /// </summary>
     /// <param name="id">索引</param>
-    /// <returns>Csv3Sheet的实例</returns>
-    public static Csv3Sheet Get(uint id)
+    /// <returns>Txt3Config的实例</returns>
+    public static Txt3Config Get(uint id)
     {
         return dictionary[id];
     }
@@ -155,7 +155,7 @@ public class Csv3Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<uint, Csv3Sheet> GetDictionary()
+    public static Dictionary<uint, Txt3Config> GetDictionary()
     {
         return dictionary;
     }

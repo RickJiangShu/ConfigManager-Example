@@ -1,87 +1,92 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class Txt3Sheet
+public class Txt2Config
 {
     /// <summary>
-    /// 宠物ID
+    /// 怪物ID
     /// </summary>
     public uint id;
 
     /// <summary>
-    /// 宠物名称
+    /// 名称
     /// </summary>
     public string name;
 
     /// <summary>
-    /// 宠物图片
+    /// 金币系数
     /// </summary>
-    public string icon;
+    public byte coinBase;
 
     /// <summary>
-    /// 升星消耗
+    /// 转生币系数
     /// </summary>
-    public int upgradeCost;
+    public byte tokenBase;
 
     /// <summary>
-    /// 页签
+    /// 经验系数
     /// </summary>
-    public byte sence;
+    public byte expBase;
 
     /// <summary>
-    /// 界面动作库
+    /// 宠物蛋ID
     /// </summary>
-    public string[] detailAnime;
+    public uint eggID;
 
     /// <summary>
-    /// 下一级ID
+    /// 攻击
     /// </summary>
-    public uint nextLevel;
+    public uint Attack;
 
     /// <summary>
-    /// 宠物技能说明
+    /// 生命
     /// </summary>
-    public string skillDetails;
+    public uint HealthPpint;
+
+    /// <summary>
+    /// 生命回复
+    /// </summary>
+    public float HealthRegen;
+
+    /// <summary>
+    /// 技能攻击
+    /// </summary>
+    public uint SkillAttack;
+
+    /// <summary>
+    /// 攻击速度
+    /// </summary>
+    public float AttackSpead;
 
     /// <summary>
     /// 攻击距离
     /// </summary>
-    public byte atkRange;
+    public float AttackRange;
 
     /// <summary>
-    /// 升级消耗
+    /// 暴击几率
     /// </summary>
-    public uint feedCost;
+    public float CritChance;
 
     /// <summary>
-    /// 伤害系数(百分比)
+    /// 暴击伤害
     /// </summary>
-    public byte atkCoefficient;
+    public float CriticalDamage;
 
     /// <summary>
-    /// 攻击动作
+    /// 溅射伤害
     /// </summary>
-    public int atkAnime;
+    public float SplashDamage;
 
     /// <summary>
-    /// 星级
+    /// 闪避
     /// </summary>
-    public byte star;
+    public float Dodge;
 
     /// <summary>
-    /// 属性集合
+    /// 移动速度
     /// </summary>
-    public string property;
-
-    /// <summary>
-    /// 技能集合
-    /// </summary>
-    public string[] skill;
-
-    /// <summary>
-    /// 获取途径
-    /// </summary>
-    public byte achieve;
+    public float MoveSpeed;
 
     /// <summary>
     /// 怪物形象
@@ -104,49 +109,34 @@ public class Txt3Sheet
     public float effectTime;
 
     /// <summary>
-    /// 界面动作宽度
+    /// 攻击动作
     /// </summary>
-    public uint animeWidth;
+    public int atkAnime;
 
     /// <summary>
-    /// 界面动作高度
+    /// BOSS说明1
     /// </summary>
-    public uint animeHeight;
+    public string detail1;
 
     /// <summary>
-    /// 获取途径参数
+    /// BOSS说明2
     /// </summary>
-    public uint achieveNum;
+    public string detail2;
 
     /// <summary>
-    /// 未解锁显示文本提示
+    /// BOSS说明3
     /// </summary>
-    public string unlockDetail;
+    public string detail3;
+
+
+    private static Dictionary<uint, Txt2Config> dictionary = new Dictionary<uint, Txt2Config>();
 
     /// <summary>
-    /// 界面显示的怪物尺寸
-    /// </summary>
-    public float modelUISize;
-
-    /// <summary>
-    /// 品质
-    /// </summary>
-    public byte quality;
-
-    /// <summary>
-    /// 移动速度
-    /// </summary>
-    public float MoveSpeed;
-
-
-    private static Dictionary<uint, Txt3Sheet> dictionary = new Dictionary<uint, Txt3Sheet>();
-
-    /// <summary>
-    /// 通过id获取Txt3Sheet的实例
+    /// 通过id获取Txt2Config的实例
     /// </summary>
     /// <param name="id">索引</param>
-    /// <returns>Txt3Sheet的实例</returns>
-    public static Txt3Sheet Get(uint id)
+    /// <returns>Txt2Config的实例</returns>
+    public static Txt2Config Get(uint id)
     {
         return dictionary[id];
     }
@@ -155,7 +145,7 @@ public class Txt3Sheet
     /// 获取字典
     /// </summary>
     /// <returns>字典</returns>
-    public static Dictionary<uint, Txt3Sheet> GetDictionary()
+    public static Dictionary<uint, Txt2Config> GetDictionary()
     {
         return dictionary;
     }

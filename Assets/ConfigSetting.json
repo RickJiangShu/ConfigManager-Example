@@ -1,0 +1,10 @@
+﻿{
+    "sourceFolder": "Assets",
+    "configOutputFolder": "Assets/Output",
+    "assetOutputFolder": "Assets/Resources",
+    "txtEnabled": true,
+    "csvEnabled": true,
+    "jsonEnabled": true,
+    "xmlEnabled": true,
+    "xlsxEnabled": true
+}
